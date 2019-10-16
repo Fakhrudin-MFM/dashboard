@@ -21,7 +21,7 @@ class Manager {
     this.checkCurrentLayout(params);
     let layout = this.getLayout(params.currentLayout, params.currentApp);
     if (!layout) {
-      return cb('Не установлен макет dashboard');
+      return cb('No dashboard layout installed dashboard');
     }
     let p = {
       dashboard: this,
@@ -112,7 +112,7 @@ class Manager {
   getLayout (id, app) {
     id = this.getId(id, app);
     if (!this.layouts[id]) {
-      this.logError(`Макет ${id} не найден`);
+      this.logError(`Layout ${id} not found`);
       return null;
     }
     return this.layouts[id];
@@ -121,7 +121,7 @@ class Manager {
   getWidget (id, app) {
     id = this.getId(id, app);
     if (!this.widgets[id]) {
-      this.logError(`Виджет ${id} не найден`);
+      this.logError(`Widget ${id} not found`);
       return null;
     }
     return this.widgets[id];
@@ -192,7 +192,7 @@ function setWidgets (dir, widgets, prefix) {
           if (widget instanceof BaseWidget) {
             widgets[id] = widget;
           } else {
-            Manager.logError(`Виджет не наследует базовый класс: ${file}`);
+            Manager.logError(`The widget does not inherit the base class: ${file}`);
           }
         }
       } catch (err) {
@@ -206,7 +206,7 @@ function setWidgets (dir, widgets, prefix) {
 function getWidget (file) {
   let widget = require(file);
   if (typeof widget !== 'function') {
-    Manager.logError(`Не определен класс виджета: ${file}`);
+    Manager.logError(`No widget class defined: ${file}`);
     return null;
   }
   return widget;
