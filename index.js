@@ -8,6 +8,8 @@ let BaseWidget = require('./base-widget');
 let IonLogger = require('core/impl/log/IonLogger');
 let sysLog = new IonLogger({});
 let moduleName = require('./module-name');
+const __ = require('core/strings').unprefix('errors');
+const Errors = require('./errors/backend');
 
 class Manager {
 
@@ -21,7 +23,7 @@ class Manager {
     this.checkCurrentLayout(params);
     let layout = this.getLayout(params.currentLayout, params.currentApp);
     if (!layout) {
-      return cb('Не установлен макет dashboard');
+      return cb(__(Errors.LAYOUT_NOT_SET));
     }
     let p = {
       dashboard: this,
@@ -112,7 +114,7 @@ class Manager {
   getLayout (id, app) {
     id = this.getId(id, app);
     if (!this.layouts[id]) {
-      this.logError(`Макет ${id} не найден`);
+      this.logError(__(Errors.NO_LAYOUT, {id}));
       return null;
     }
     return this.layouts[id];
@@ -121,7 +123,7 @@ class Manager {
   getWidget (id, app) {
     id = this.getId(id, app);
     if (!this.widgets[id]) {
-      this.logError(`Виджет ${id} не найден`);
+      this.logError(__(Errors.NO_WIDGET, {id}));
       return null;
     }
     return this.widgets[id];
@@ -192,7 +194,7 @@ function setWidgets (dir, widgets, prefix) {
           if (widget instanceof BaseWidget) {
             widgets[id] = widget;
           } else {
-            Manager.logError(`Виджет не наследует базовый класс: ${file}`);
+            Manager.logError(__(Errors.WIDGET_NOT_BASE, {file}));
           }
         }
       } catch (err) {
@@ -206,7 +208,7 @@ function setWidgets (dir, widgets, prefix) {
 function getWidget (file) {
   let widget = require(file);
   if (typeof widget !== 'function') {
-    Manager.logError(`Не определен класс виджета: ${file}`);
+    Manager.logError(__(Errors.WIDGET_NOT_FUNC, {file}));
     return null;
   }
   return widget;

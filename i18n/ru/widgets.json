@@ -1,0 +1,10 @@
+{
+  "widgets.cpuSnapshot.load": "Нагрузка CPU (%)",
+  "widgets.hddSnapshot.load": "Нагрузка HDD (Gb)",
+  "widgets.ramSnapshot.load": "Нагрузка RAM (Mb)",
+  "widgets.frequency": "Частота обновления",
+  "widgets.lastMaxValue": "Последнее макс. значение",
+  "widgets.lastMinValue": "Последнее мин. значение",
+  "js.widgets.load": "Загружено",
+  "js.widgets.free": "Свободно"
+}

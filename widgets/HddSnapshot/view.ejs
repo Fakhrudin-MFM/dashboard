@@ -10,7 +10,7 @@
     <span class="glyphicon glyphicon-refresh spinning"></span>
   </div>
   <div class="widget-body">
-    <h3 class="widget-title">Нагрузка HDD (Gb)</h3>
+    <h3 class="widget-title"><%=__('widgets.hddSnapshot.load')%></h3>
     <div class="widget-content">
       <div class="snap-container snap-lg">
         <div class="snap-chart-holder chart-holder">
@@ -21,15 +21,15 @@
         </div>
         <div class="info-holder">
           <div class="info-item refresh-info-item">
-            <div class="info-item-label">Частота обновления</div>
+            <div class="info-item-label"><%=__('widgets.frequency')%></div>
             <div class="info-item-value"></div>
           </div>
           <div class="info-item last-max-info-item">
-            <div class="info-item-label">Последнее макс. значение</div>
+            <div class="info-item-label"><%=__('widgets.lastMaxValue')%></div>
             <div class="info-item-value"></div>
           </div>
           <div class="info-item last-min-info-item">
-            <div class="info-item-label">Последнее мин. значение</div>
+            <div class="info-item-label"><%=__('widgets.lastMinValue')%></div>
             <div class="info-item-value"></div>
           </div>
         </div>
@@ -48,7 +48,7 @@
         refreshDelay: 30000,
         snapChart: {
           data: {
-            labels: ['Загружено', 'Свободно'],
+            labels: [__('js.widgets.load'), __('js.widgets.free')],
             datasets: [{
               data: [0, 100],
               backgroundColor: ["#ca0","#08c"],

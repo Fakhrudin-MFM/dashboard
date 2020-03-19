@@ -1,9 +1,11 @@
 'use strict';
 
-let dashboard = require('../index');
+const dashboard = require('../index');
+const __ = require('core/strings').unprefix('errors');
+const Errors = require('../errors/web-errors');
 
 module.exports = function (req, res) {
-  let widget = dashboard.getWidget(req.params.id);
+  const widget = dashboard.getWidget(req.params.id);
   if (widget) {
     try {
       widget.refresh(req, res);
@@ -11,6 +13,6 @@ module.exports = function (req, res) {
       res.status(500).send(err);
     }
   } else {
-    res.status(404).send('Виджет не найден');
+    res.status(404).send(__(Errors.NO_WIDGET));
   }
 };
